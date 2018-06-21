@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class Song implements Comparable <Song>, Comparator<Song>, Serializable
+public class Song implements Serializable
 {
     long id;
     private String title;
@@ -39,28 +39,6 @@ public class Song implements Comparable <Song>, Comparator<Song>, Serializable
 
     public int getIcon() {
         return icon;
-    }
-
-    public boolean equals(Object aSong) {
-        Song s = (Song) aSong;
-        return getTitle().equals(s.getTitle());
-    }
-
-    public int hashCode() {
-        return title.hashCode();
-    }
-
-    public int compareTo(Song s)
-    {
-        return title.compareTo(s.getTitle());
-    }
-
-    public int compare (Song a, Song b){
-        return a.getTitle().compareTo(b.getTitle());
-    }
-
-    public String toString() {
-        return "album: " + album + ", title:"+ title+ " [path: "+file + "icon: "+icon+ "]";
     }
 
     public int getImage() {return image; }

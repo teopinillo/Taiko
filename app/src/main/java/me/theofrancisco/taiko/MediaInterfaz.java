@@ -27,7 +27,7 @@ public class MediaInterfaz extends AppCompatActivity {
     // Used when update audio progress thread send message to progress bar handler.
     private static final int UPDATE_AUDIO_PROGRESS_BAR = 3;
     // Wait update audio progress thread sent message, then update audio play progress.
-    private Handler progressHandler;
+    private static Handler progressHandler;
 
     // The thread that send message to audio progress handler to update progress every one second.
     private Thread progressThread = null;
