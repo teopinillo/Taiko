@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Taiko</string>
+    <string name="album" translatable="false">album</string>
+</resources>

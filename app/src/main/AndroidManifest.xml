@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.theofrancisco.taiko">
+    <!-- We will use this permission to let music playback continue when the user's device becomes idle. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--
+         The launchMode will aid the process of navigating back to the app after moving away
+         from it. We will display a notification indicating the song currently being played,
+          tapping the notification will take the user back to the app.
+        -->
+
+
+        <!-- We will stick to portrait orientation for simplicity. -->
+
+        <activity
+            android:name=".TaikoActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- We are also going to use a Service class for music playback. -->
+        <!-- service android:name="me.theofrancisco.taiko.MusicService" / -->
+
+        <activity android:name=".MediaInterfaz"></activity>
+    </application>
+
+</manifest>

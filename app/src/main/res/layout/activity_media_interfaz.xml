@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_centerVertical="true"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/front_ratio_9_15"
+    tools:context=".MediaInterfaz">
+
+
+    <ImageView
+        android:id="@+id/songImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="song_icon"
+        android:src="@drawable/passenger_1" />
+
+    <TextView
+        android:id="@+id/textSongTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/songImage"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="false"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        tools:text="song title" />
+
+    <TextView
+        android:id="@+id/textArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textSongTitle"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="false"
+        android:gravity="center_horizontal"
+        android:text="Artist"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_below="@id/textArtist" />
+
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressBar"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/previous"
+            android:onClick="btnPreviousClick"/>
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/pause"
+            android:onClick="btnPauseClick"/>
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/next"
+            android:onClick="btnNextClick"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
