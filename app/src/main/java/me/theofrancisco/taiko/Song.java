@@ -2,17 +2,16 @@ package me.theofrancisco.taiko;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Comparator;
 
-public class Song implements Serializable
+class Song implements Serializable
 {
-    long id;
-    private String title;
+    final long id;
+    private final String title;
     private String album;
-    private int icon;
+    private final int icon;
     private File file;
-    private String artist;
-    private int image;
+    private final String artist;
+    private final int image;
 
 
     public Song(long songID, String songTitle, String songArtist, int image, int icon) {
@@ -34,7 +33,7 @@ public class Song implements Serializable
     }
 
     public String getAlbum(){
-        return album;
+        if (album==null) return "" ; else return album;
     }
 
     public int getIcon() {

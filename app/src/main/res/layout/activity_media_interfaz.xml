@@ -19,8 +19,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
+        android:maxHeight="230dp"
         android:contentDescription="song_icon"
-        android:src="@drawable/passenger_1" />
+        android:src="@drawable/passenger_2" />
 
     <TextView
         android:id="@+id/textSongTitle"
@@ -71,25 +72,38 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/previous"
-            android:onClick="btnPreviousClick"/>
+            android:src="@drawable/previous"
+            android:onClick="btnPreviousClick"
+            android:contentDescription="button previous"/>
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/pause"
-            android:onClick="btnPauseClick"/>
+            android:src="@drawable/pause"
+            android:onClick="btnPauseClick"
+            android:contentDescription="Button Play/Pause"/>
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/next"
-            android:onClick="btnNextClick"/>
+            android:src="@drawable/next"
+            android:onClick="btnNextClick"
+            android:contentDescription="Button Next"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        app:srcCompat="@drawable/back_2"
+        android:onClick="backToList"/>
 
 
 </RelativeLayout>

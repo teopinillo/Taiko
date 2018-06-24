@@ -1,5 +1,6 @@
 package me.theofrancisco.taiko;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,23 +17,19 @@ import java.util.ArrayList;
 
 public class MediaInterfaz extends AppCompatActivity {
 
-    MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private ArrayList<Song> songList;
     private int currentSongPos;
     private TextView songTitleView;
     private TextView songArtistView;
-    private ProgressBar progressBar;
     private ImageView songIcon;
     // Used when update audio progress thread send message to progress bar handler.
     private static final int UPDATE_AUDIO_PROGRESS_BAR = 3;
     // Wait update audio progress thread sent message, then update audio play progress.
     private static Handler progressHandler;
 
-    // The thread that send message to audio progress handler to update progress every one second.
-    private Thread progressThread = null;
     private boolean audioIsPlaying = true;
-    private ImageButton imageButton;
-
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +43,7 @@ public class MediaInterfaz extends AppCompatActivity {
 
         /* Initialize audio progress handler. */
         if (progressHandler == null) {
-            progressHandler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    if (msg.what == UPDATE_AUDIO_PROGRESS_BAR) {
-
-                        if (mediaPlayer != null) {
-                            // Get current play time. (in milliseconds)
-                            int currPlayPosition = mediaPlayer.getCurrentPosition();
-
-                            // Get total play time in milliseconds
-                            int totalTime = mediaPlayer.getDuration();
-
-                            // Calculate the percentage.
-                            int currProgress = (currPlayPosition * 100) / totalTime;
-
-                            // Update progressbar.
-                            progressBar.setProgress(currProgress);
-                        }
-                    }
-                }
-            };
+            progressHandler = new MyHandler(progressBar);
         }
 
 
@@ -76,7 +52,7 @@ public class MediaInterfaz extends AppCompatActivity {
         songList = songTransfer.getSongs();
 
         // Create the thread.
-        progressThread = new Thread() {
+        Thread progressThread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -100,7 +76,8 @@ public class MediaInterfaz extends AppCompatActivity {
     }
 
     //https://stackoverflow.com/questions/18459122/play-sound-on-button-click-android
-    public void playSong(Song song) {
+    private void playSong(Song song) {
+        if (progressBar!=null) progressBar.setProgress(0);
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.reset();
@@ -129,6 +106,22 @@ public class MediaInterfaz extends AppCompatActivity {
         playSong(songList.get(currentSongPos));
     }
 
+
+    public void btnPauseClick(View view) {
+        ImageButton imageButton = findViewById(R.id.imageButton2);
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+                audioIsPlaying = false;
+                imageButton.setImageResource(R.drawable.play);
+            } else {
+                imageButton.setImageResource(R.drawable.pause);
+                audioIsPlaying = true;
+                mediaPlayer.start();
+            }
+        }
+    }
+
     public void btnNextClick(View view) {
         if (currentSongPos == songList.size() - 1) {
             currentSongPos = 0;
@@ -138,19 +131,39 @@ public class MediaInterfaz extends AppCompatActivity {
         playSong(songList.get(currentSongPos));
     }
 
-    public void btnPauseClick(View view) {
-        imageButton = findViewById(R.id.imageButton2);
-        if (mediaPlayer != null) {
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.pause();
-                audioIsPlaying=false;
-                int id = getResources().getIdentifier("play", "mipmap", getPackageName());
-                imageButton.setImageResource(id);
-            } else {
-                int id = getResources().getIdentifier("pause", "mipmap", getPackageName());
-                imageButton.setImageResource(id);
-                audioIsPlaying=true;
-                mediaPlayer.start();
+    public void backToList(View view) {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        finish();
+    }
+
+    private static class MyHandler extends Handler {
+        ProgressBar pb;
+        MyHandler (ProgressBar _progressBar){
+            pb = _progressBar;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == UPDATE_AUDIO_PROGRESS_BAR) {
+
+                if (mediaPlayer != null) {
+                    // Get current play time. (in milliseconds)
+                    int currPlayPosition = mediaPlayer.getCurrentPosition();
+
+                    // Get total play time in milliseconds
+                    int totalTime = mediaPlayer.getDuration();
+
+                    // Calculate the percentage.
+                    int currProgress = (currPlayPosition * 100) / totalTime;
+
+                    // Update progressbar.
+                    pb.setProgress(currProgress);
+                }
             }
         }
     }

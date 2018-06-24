@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SongFactory {
+class SongFactory {
 
     private static Map<Character, Integer> icons;
 
@@ -13,7 +13,7 @@ public class SongFactory {
        ArrayList<Song> songs = new ArrayList<>();
         songs.add ( new Song (R.raw.all_the_little_lights,"All The Little Lights","Passenger", R.drawable.passenger_1,getIcon("a")));
         songs.add ( new Song (R.raw.doshus_the_only_time_ac_dc,"The Only Time","AC/DC", R.drawable.ac_dc,getIcon("t")));
-        songs.add ( new Song (R.raw.circles_passenger,"Circles","Passenger",R.drawable.ac_dc,getIcon("c")));
+        songs.add ( new Song (R.raw.circles_passenger,"Circles","Passenger",R.drawable.passenger_2,getIcon("c")));
         songs.add (new Song (R.raw.deep_purple_smoke_on_the_water,"Smoke in the Water","Deep Purple",R.drawable.deep_purple,getIcon("s")));
         songs.add (new Song (R.raw.feather_on_the_clyde,"Feather on The Clyde","Passenger",R.drawable.passenger_3,getIcon("f")));
         songs.add (new Song (R.raw.guns_n_roses_paradise_city,"Paradaise City","Guns and Roses",R.drawable.guns_n_roses,getIcon("p")));
@@ -51,7 +51,7 @@ public class SongFactory {
         icons.put('x', R.drawable.x);
         icons.put('y', R.drawable.y);
         icons.put('z', R.drawable.z);
-        icons.put('?', R.drawable.ten);
+
     }
 
     private static int getIcon(String title) {

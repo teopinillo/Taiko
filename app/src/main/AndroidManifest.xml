@@ -11,9 +11,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
 
         <!--
          The launchMode will aid the process of navigating back to the app after moving away
@@ -30,14 +31,17 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- We are also going to use a Service class for music playback. -->
-        <!-- service android:name="me.theofrancisco.taiko.MusicService" / -->
 
-        <activity android:name=".MediaInterfaz"></activity>
+
+        <activity android:name=".MediaInterfaz"
+            android:label="Player"
+            android:parentActivityName=".TaikoActivity"
+            >
+        </activity>
+
     </application>
 
 </manifest>
